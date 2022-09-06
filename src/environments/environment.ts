@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  url: 'https://192.168.0.15:44322/api/'
+  url: 'https://desktop-prog:44322/api/'
+  // url: 'https://192.168.0.15:44322/api/'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
