@@ -21,6 +21,8 @@ export class ApiBackendService {
     private http: HttpClient
   ) {
     this.url = environment.url;
+    console.log(this.url);
+
   }
 
   getCliente(): Observable<Response> {
