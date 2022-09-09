@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Cliente:</mat-label>
+    <input matInput [(ngModel)]="venta.idCliente">
+  </mat-form-field>
+  <form [formGroup]="conceptoForm" (submit)="addConcepto()">
+    <mat-form-field>
+      <mat-label>Producto:</mat-label>
+      <input type="text" matInput formControlName="idProducto" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cantidad:</mat-label>
+      <input type="text" matInput formControlName="cantidad" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Importe:</mat-label>
+      <input type="text" matInput formControlName="importe" matInput>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary" [disabled]="!conceptoForm.valid">  <i class="fa fa-plus" aria-hidden="true"></i> Agregar concepto</button>
+    </div>
+  </form>
+  <div>
+    <h5>Conceptos</h5>
+    <table style="width: 100%;">
+      <tr>
+        <th>Cantidad</th>
+        <th>Importe</th>
+      </tr>
+      <tr *ngFor="let item of concepto">
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.importe }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="info" (click)="close()"> <i class="fa fa-times" aria-hidden="true"></i>
+    Cancelar</button>
+  <button mat-raised-button color="primary" (click)="addVenta()"> <span [innerHTML]="icon"></span>
+    {{ btn }}</button>
+</div>

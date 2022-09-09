@@ -14,10 +14,12 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { DialogComponent } from './components/cliente/dialog/dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteComponent } from './components/common/delete/delete.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatCardModule } from "@angular/material/card";
+import { VentaComponent } from './components/venta/venta.component';
+import { VentaDialogComponent } from './components/venta/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,10 @@ import { MatCardModule } from "@angular/material/card";
     HomeComponent,
     ClienteComponent,
     DialogComponent,
+    VentaDialogComponent,
     DeleteComponent,
-    LoginComponent
+    LoginComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { MatCardModule } from "@angular/material/card";
     MatInputModule,
     MatSnackBarModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

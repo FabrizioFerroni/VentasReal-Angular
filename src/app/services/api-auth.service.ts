@@ -1,3 +1,4 @@
+import { Login } from './../models/login';
 import { Usuario } from '../models/usuario';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +16,7 @@ export class ApiAuthService {
   url!: string;
 
   private usuarioSubject: BehaviorSubject<Usuario>;
-
+  usuario: Observable<Usuario>;
   public get usuarioData(): Usuario {
     return this.usuarioSubject.value;
   }
@@ -26,12 +27,12 @@ export class ApiAuthService {
     this.url = environment.url;
 
     this.usuarioSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('usuario')!));
-
+    this.usuario = this.usuarioSubject.asObservable();
   }
 
 
-  login(data: any): Observable<Response> {
-    return this.http.post<Response>(this.url + 'usuario/login', data).pipe(
+  login(login: Login): Observable<Response> {
+    return this.http.post<Response>(this.url + 'usuario/login', login).pipe(
       map(res => {
         if(res.status === 200){
           const user: Usuario = res.data;

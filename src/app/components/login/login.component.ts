@@ -2,6 +2,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Router } from '@angular/router';
 import { ApiAuthService } from './../../services/api-auth.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  email!: string;
-  password!: string;
-  data = {};
+  // loginForm = new FormGroup({
+  //   email: new FormControl(''),
+  //   password: new FormControl(''),
+  // });
+
+  loginForm = this.fb.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(
     private authServ: ApiAuthService,
     private router: Router,
     public snackBar: MatSnackBar,
+    private fb: FormBuilder,
   ) {
     if (authServ.usuarioData) {
       this.router.navigate(['/']);
@@ -26,16 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
   }
 
-
   login(): void {
-    this.data = {
-      email: this.email,
-      password: this.password
-    };
-
-    this.authServ.login(this.data).subscribe(
+    console.log(this.loginForm.value);
+    this.authServ.login(this.loginForm.value).subscribe(
       res => {
         if (res.status === 200) {
           this.router.navigate(['/'])
